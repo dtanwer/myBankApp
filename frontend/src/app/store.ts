@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "@reduxjs/toolkit";
-import exp from "constants";
+import  authReducer  from "../features/auth/auth.slice";
 import { useDispatch } from 'react-redux'
 
 const store=configureStore({
     reducer: combineReducers({
-        // add reducers here
+       auth:authReducer
     })
 });
 
 
+export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch 
 
 export default store;

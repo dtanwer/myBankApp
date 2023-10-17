@@ -9,7 +9,7 @@ export const SignUpschema = yup.object().shape({
   password: yup
     .string()
     .required("Password is required")
-    .min(4, "​Password must be at least 4 characters"),
+    .min(3, "​Password must be at least 3 characters"),
   passwordConfirm: yup
     .string()
     .required("Passwords does not match")
@@ -22,5 +22,5 @@ export const Loginschema = yup.object().shape({
   password: yup
     .string()
     .required("Password is required")
-    .min(4, "​Password must be at least 4 characters"),
+    .min(3, "​Password must be at least 3 characters"),
 });

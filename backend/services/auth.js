@@ -40,15 +40,18 @@ export const loginUserServices = async (req, res) => {
 
 export const signUpUserServices = async (req, res) => {
   try {
-    const newUser = await userModel.create(req.body);
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const newUser = new userModel({...req.body, password: hashedPassword});
+    await newUser.save();
     res.status(200).json({
       status: "success",
       message: "User created successfully",
       data: newUser,
     });
   } catch (error) {
+    console.log(error.message)
     res.status(400).json({
-      status: "error",
+      status: "warning",
       message: error.message,
     });
   }
