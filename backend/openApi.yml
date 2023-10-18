@@ -1,0 +1,1343 @@
+openapi: 3.0.3
+info:
+  title:  Bankff
+  description: Bank API
+  version: 1.0.0
+  contact:
+    name: Deepak
+    email: tanwer644d@gmail.com
+paths:
+  /bank:
+    post:
+      summary: To create a new bank.
+      tags:
+      - Bank
+      description: Create a new bank in different location
+      requestBody:
+        description: Creating a new bank in different location
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bank'
+        required: true
+      responses:
+        '201':
+          description: New bank created successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Bank'
+                  - type: object
+                    properties:
+                      bankId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    get:
+      summary: To get all banks.
+      tags:
+      - Bank
+      description: Get all banks in different location
+      responses:
+        '200':
+          description: All banks fetched successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  banksLength:
+                    type: number
+                  banks:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: '#/components/schemas/Bank'
+                        - type: object
+                          properties:
+                            bankId:
+                              type: string
+                            createdAt:
+                              type: string
+                              format: date-time
+                            updatedAt:
+                              type: string
+                              format: date-time
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /bank/{bankId}:
+    get:
+      summary: To get a bank.
+      tags:
+      - Bank
+      description: Get a bank in different location
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: string
+          required: true
+          description: bankId of the bank
+      responses:
+        '200':
+          description: Bank fetched successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Bank'
+                  - type: object
+                    properties:
+                      bankId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time 
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Bank not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: To update a bank.
+      tags:
+      - Bank
+      description: Update a bank in different location
+      parameters:
+        - in: path
+          name: bankId
+          schema:
+            type: string
+          required: true
+          description: bankId of the bank
+      requestBody:
+        description: Updating a bank in different location
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bank'
+        required: true
+      responses:
+        '200':
+          description: Bank updated successfully
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Bank'
+                  - type: object
+                    properties:
+                      bankId:
+                        type: string
+                      createdAt:
+                        type: string
+                        format: date-time
+                      updatedAt:
+                        type: string
+                        format: date-time
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Bank not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string      
+  /auth/signup:
+    post:
+      summary: To signup a new user.
+      tags:
+      - Auth
+      description: Register a new user in our Bank
+      requestBody:
+        description: Registering a new user in our Bank
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestSchema'
+        required: true
+      responses:
+        '201':
+          description: New user registered successfully in our Zenmonk Portal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        default:
+          description: Unexpected Error
+  /auth/login:
+    post:
+      summary: login user.
+      tags:
+      - Auth
+      description: login user in our Bank
+      requestBody:
+        description: login User our Bank
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        required: true
+      responses:
+        '201':
+          description: User login successfully in our Bank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        default:
+          description: Unexpected Error
+  /user:
+    get:
+      summary: To get all Users Data.
+      tags:
+      - User
+      description: Get user details
+      responses:
+        '200':
+          description: "get users Data successfully"
+          content:
+            application/json:
+              schema:
+                properties:
+                  usersLength:
+                    type: number
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user?role={role}:
+    get:
+      summary: To get all Users Data have role.
+      tags:
+      - User
+      description: Get user details with role
+      parameters:
+        - in: query
+          name: role
+          schema:
+            type: string
+          required: true
+          description: role of the user
+      responses:
+        '200':
+          description: "get users Data successfully"
+          content:
+            application/json:
+              schema:
+                properties:
+                  usersLength:
+                    type: number
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}:
+    get:
+      summary: To get a User Data.
+      tags:
+      - User
+      description: Get user details
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user Data successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: To update a User Data.
+      tags:
+      - User
+      description: Update user details
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestSchema'
+        required: true
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponseSchema'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}/personalDetails:
+    get:
+      summary: To get a User Personal Details.
+      tags:
+      - User Personal Details
+      description: Get user personal details
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user personal details successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: To update a User Personal Details.
+      tags:
+        - User Personal Details
+      description: Update user personal details
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user personal details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonalDetails'
+        required: true
+      responses:
+        '200':
+          description: User personal details updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User personal details not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}/accountDetails:
+    get:
+      summary: To get a User Account Details.
+      tags:
+      - User Account Details
+      description: Get user account details
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user account details successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      description: Update user account details
+      tags:
+        - User Account Details
+      summary: To update a User Account Details.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user account details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountDetails'
+        required: true
+      responses:
+        '200':
+          description: User account details updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User account details not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}/documents:
+    get:
+      description: Get user documents
+      tags:
+        - User Documents
+      summary: To get a User Documents.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user documents successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User documents not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      description: Update user documents
+      tags:
+        - User Documents
+      summary: To update a User Documents.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user documents
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Documents'
+        required: true
+      responses:
+        '200':
+          description: User documents updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User documents not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}/nominee:
+    get:
+      description: Get user nominee
+      tags:
+        - User Nominee
+      summary: To get a User Nominee.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user nominee successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nominee'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User nominee not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      description: Update user nominee
+      tags:
+        - User Nominee
+      summary: To update a User Nominee.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user nominee
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nominee'
+        required: true
+      responses:
+        '200':
+          description: User nominee updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nominee'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User nominee not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /user/{accountNumber}/balance:
+    get:
+      description: Get user balance
+      tags:
+        - User Balance
+      summary: To get a User Balance.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      responses:
+        '200':
+          description: "get user balance successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User balance not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      description: Update user balance
+      tags:
+        - User Balance
+      summary: To update a User Balance.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+      requestBody:
+        description: Updating a user balance
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Balance'
+        required: true
+      responses:
+        '200':
+          description: User balance updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balance'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        default:
+          description: Unexpected Error
+  /user/{accountNumber}/transaction:
+    get:
+      description: Get user transactions
+      tags:
+        - User Transaction
+      summary: To get a User Transaction.
+      parameters:
+        - in: path
+          name: accountNumber
+          schema:
+            type: string
+          required: true
+          description: accountNumber of the bank
+        - in: query
+          name: transactionType
+          schema:
+            type: string
+          description: transactionType of the bank
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: limit of the transaction
+        - in: query
+          name: startDate
+          schema:
+            type: string
+            format: date-time
+          description: startDate of the transaction
+          
+          
+      responses:
+        '200':
+          description: "get user transaction successfully"
+          content:
+            application/json:
+              schema:
+                properties:
+                  transactionsLength:
+                    type: number
+                  transactions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Transaction'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+            description: Internal server error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+        default:
+          description: Unexpected Error
+    
+
+  
+
+
+components:
+  schemas:
+    UserRequestSchema:
+      type: object
+      properties:
+        bankId: 
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum:
+            - employee
+            - manager
+            - cashier
+            - customer
+        password:
+          type: string
+      required:
+        - name
+        - email
+        - role
+        - bankId
+        - password
+    UserResponseSchema:
+      allOf:
+        - $ref: '#/components/schemas/UserRequestSchema'
+        - type: object
+          properties:
+            bankId:
+              type: string
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+    PersonalDetails:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        userImage:
+          type: string
+        maritalStatus:
+          type: string
+          enum:
+            - married
+            - unmarried
+        socialIds:
+          $ref: "#/components/schemas/SocialIds"
+        dob:
+          type: string
+          format: date-time
+        alternateContact:
+          type: string
+        permanentAddress:
+          $ref: "#/components/schemas/Address"
+        currentAddress:
+          type: object
+          properties:
+            currentAddressIndex:
+              type: number
+            Address:
+              type: array
+              items:
+                $ref: "#/components/schemas/Address"        
+    SocialIds:
+      type: object
+      properties:
+        linkedIn:
+          type: string
+        facebook:
+          type: string
+        instagram:
+          type: string
+        twitter:
+          type : string
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        pincode:
+          type: string
+      required:
+        - street
+        - city
+        - state
+        - country
+        - pincode
+    Nominee:
+        type: object
+        properties:
+          name:
+            type: string
+          relation:
+            type: string
+            enum:
+              - father
+              - mother
+              - brother
+              - sister
+              - wife
+              - husband
+              - son
+              - daughter
+              - grandfather
+              - grandmother
+              - grandson
+              - granddaughter
+              - friend
+              - other
+          PersonalDetails:
+            $ref: "#/components/schemas/PersonalDetails"
+        required:
+          - name
+          - relation
+          - contact
+          - email
+          - PersonalDetails
+    AccountDetails:
+      type: object
+      properties:
+        accountType:
+          type: string
+          enum:
+            - savings
+            - current
+            - salary
+        accountNumber:
+          type: string
+        nominee:
+          $ref: "#/components/schemas/Nominee"
+        balance:
+          $ref: "#/components/schemas/Balance"
+      required:
+        - accountType
+        - accountNumber
+        - nominee
+    Bank:
+      type: object
+      properties:
+        bankName:
+          type: string
+        branchName:
+          type: string
+        ifscCode:
+          type: string
+        address:
+          $ref: "#/components/schemas/Address"
+      required:
+        - bankName
+        - branchName
+        - ifscCode
+        - address
+    Balance:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        accountType:
+          type: string
+          enum:
+            - savings
+            - current
+            - salary
+        balance:
+          type: string
+        currency:
+          type: string
+          enum:
+            - INR
+            - USD
+    Documents:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        aadharCard:
+          type: string
+        panCard:
+          type: string
+        passport:
+          type: string
+        voterId:
+          type: string
+        drivingLicense:
+          type: string
+      required:
+        - accountNumber
+        - aadharCard
+        - panCard
+    Transaction:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+        amount:
+          type: string
+        transactionType:
+          type: string
+          enum:
+            - credit
+            - debit
+            - transfer
+        transactionMode:
+          type: string
+          enum:
+            - cash
+            - cheque
+            - online
+        transactionDate:
+          type: string
+          format: date-time
+        transactionId:
+          type: string
+        transactionStatus:
+          type: string
+          enum:
+            - success
+            - failed
+        transactionRemarks:
+          type: string
+    
