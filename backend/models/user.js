@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 const UserSchema = new mongoose.Schema({
+    bankId: {
+        type: String,
+        required: "Bank Id is required"
+    },
     name: {
         type: String,
         required: "Name is required"
@@ -11,10 +15,14 @@ const UserSchema = new mongoose.Schema({
         unique: true ,
         required: "Email is required"
     },
+    role:{
+        type: String,
+        enum: ["employee", "customer","cashier","manager"],
+    },
     password: {
         type: String,
         required: "Password is required"
     }
-});
+}, { timestamps: true });
 
 export default mongoose.model("User", UserSchema);

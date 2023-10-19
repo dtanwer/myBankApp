@@ -14,6 +14,10 @@ const AddressSchema = new mongoose.Schema(
       type: String,
       required: "State is required",
     },
+    country: {
+      type: String,
+      required: "Country is required",
+    },
     pincode: {
       type: String,
       required: "PinCode is required",

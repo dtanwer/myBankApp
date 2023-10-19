@@ -1164,7 +1164,11 @@ components:
         dob:
           type: string
           format: date-time
-        alternateContact:
+        contactNumber:
+          type: string
+        alternateContactNumber:
+          type: string
+        occupation:
           type: string
         permanentAddress:
           $ref: "#/components/schemas/Address"
@@ -1173,7 +1177,7 @@ components:
           properties:
             currentAddressIndex:
               type: number
-            Address:
+            addresses:
               type: array
               items:
                 $ref: "#/components/schemas/Address"        
@@ -1240,12 +1244,6 @@ components:
     AccountDetails:
       type: object
       properties:
-        accountType:
-          type: string
-          enum:
-            - savings
-            - current
-            - salary
         accountNumber:
           type: string
         nominee:
@@ -1277,12 +1275,6 @@ components:
       properties:
         accountNumber:
           type: string
-        accountType:
-          type: string
-          enum:
-            - savings
-            - current
-            - salary
         balance:
           type: string
         currency:
