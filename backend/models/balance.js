@@ -8,12 +8,13 @@ const BalanceSchema = new mongoose.Schema({
     },
     balance:{
         type: Number,
-        required: "Balance is required",
+        default: 0,
     },
     currency:{
         type: String,
         required: "Currency is required",
-        enum: ["INR", "USD"]
+        enum: ["INR", "USD"],
+        default: "INR",
     },
 }, { timestamps: true });
 

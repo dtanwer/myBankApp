@@ -1,20 +1,18 @@
-import jwt from "jsonwebtoken";
+import { loginUserServices, signUpUserServices } from "../services/auth.services.js";
 import bcrypt from "bcryptjs";
-import userModel from "../models/user.js";
+import jwt from "jsonwebtoken";
 
-export const loginUserServices = async (req, res) => {
-  const { email, password } = req.body;
+export const login = async (req, res) => {
   try {
-    const user = await userModel.findOne({ email });
-
-    if (!user)
+    const user = await loginUserServices(req.body);
+    if (!user) {
       return res
         .status(400)
         .json({ status: "warning", message: "User does not exist" });
+    }
 
-    const isMatch =  bcrypt.compare(password, user.password);
-
-
+    const isMatch = await bcrypt.compare(req.body.password, user.password);
+  
     if (!isMatch)
       return res
         .status(400)
@@ -32,24 +30,21 @@ export const loginUserServices = async (req, res) => {
       });
   } catch (error) {
     res.status(400).json({
-      status: "error",
+      status: "warning",
       message: error.message,
     });
   }
 };
 
-export const signUpUserServices = async (req, res) => {
+export const signUp = async (req, res) => {
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const newUser = new userModel({...req.body, password: hashedPassword});
-    await newUser.save();
+    const newUser = await signUpUserServices(req.body);
     res.status(200).json({
       status: "success",
       message: "User created successfully",
       data: newUser,
     });
   } catch (error) {
-    console.log(error.message)
     res.status(400).json({
       status: "warning",
       message: error.message,

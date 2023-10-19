@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema({
         unique: true ,
         required: "Email is required"
     },
+    accountNumber: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Account",
+    },
     role:{
         type: String,
         enum: ["employee", "customer","cashier","manager"],
