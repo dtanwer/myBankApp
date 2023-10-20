@@ -1,12 +1,12 @@
-import { Button, Stack } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import React from 'react'
-
+import EastIcon from '@mui/icons-material/East';
 export const NavList = () => {
     const navList = ['Our Branch', 'Loan', 'Invest', 'Protect']
     return (
-        <Stack direction={'row'} gap={20}>
-            {navList.map(item => <span style={{cursor:"pointer"}}>{item}</span>)}
-            <Button variant="contained" color="success" sx={{borderRadius:10,pl:4, pr:4}}>Become a Member</Button>
-        </Stack>
+        <Box sx={{ display: 'flex', justifyContent: "space-between", flexWrap: "wrap", alignItems: "center", gap: "10px", width: "70vw" }}>
+            {navList.map(item => <span style={{ cursor: "pointer" }}>{item}</span>)}
+            <Button variant="contained" color="success" endIcon={<EastIcon />}>Become a Member</Button>
+        </Box>
     )
 }

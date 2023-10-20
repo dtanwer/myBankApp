@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
+import { ThemeProvider } from '@emotion/react';
+import theme from './theme';
+import { CssBaseline } from '@mui/material';
 
 
 const root = ReactDOM.createRoot(
@@ -14,14 +17,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
       <SnackbarProvider maxSnack={3}>
         <App />
       </SnackbarProvider>
+    </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
