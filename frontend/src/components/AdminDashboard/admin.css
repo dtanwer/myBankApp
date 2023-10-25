@@ -1,0 +1,13 @@
+.dashBoardAction{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    border: 1px solid #e6e6e6;
+    width: fit-content;
+}
+.actionCard{
+    cursor: pointer;
+    text-align: center;
+    width: fit-content;
+    margin: 30px;
+}

@@ -1,10 +1,13 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Modal, Typography } from '@mui/material'
 import './banner.css'
 import { HomeLogin } from './HomeLogin'
 import { AtmFinder } from './AtmFinder'
 import EastIcon from '@mui/icons-material/East';
+import { useState } from 'react';
+import { Login } from '../Auth/Login';
 
 export const Banner = () => {
+    
     return (
         <Box className="banner" >
             <img src="https://www.alliantcreditunion.org/images/uploads/images/home-hero-certs-hammock_042123.jpg" alt="banner" style={{ width: "100%" }} />
@@ -25,6 +28,8 @@ export const Banner = () => {
                 <HomeLogin />
                 <AtmFinder />
             </Box>
+
+           
 
         </Box>
     )

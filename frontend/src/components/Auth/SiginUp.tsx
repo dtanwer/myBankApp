@@ -35,11 +35,11 @@ export const SiginUp = ({ setIsLogin }: registerPropsType) => {
     }, [loading, message, type])
 
     return (
-        <Box>
+        <Box sx={{textAlign:"center"}}>
             <Typography variant="h5" mb={4}>Create Your Account</Typography>
             <form onSubmit={handleSubmit(submit)}>
                 <Stack spacing={2} sx={{ width: "300px" }}>
-                    <TextField label="Email" variant="outlined" size='small' {...register("email")}
+                    <TextField label="Email" variant="outlined" fullWidth size='small' {...register("email")}
                         error={errors.email ? true : false}
                         helperText={errors.email?.message}
                     />

@@ -35,7 +35,7 @@ export const Login = ({ setIsLogin }: loginPropsType) => {
 
 
   return (
-    <Box>
+    <Box sx={{textAlign:"center"}}>
       <Typography variant="h5" mb={4}>Login</Typography>
       <form onSubmit={handleSubmit(onLogin)}>
         <Stack spacing={2}>

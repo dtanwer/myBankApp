@@ -1,0 +1,23 @@
+.chatNowButton{
+    color: white;
+    width: fit-content;
+    height: 50px;
+    border: 1px solid white;
+    padding: 10px 20px;
+    position: fixed;
+    transform: rotate(270deg);
+    background: #00aeef;
+    right: -30px;
+    bottom: 30vh;
+    cursor: pointer;
+    margin: 0;
+    transition: 0.3s;
+}
+
+.chatNowButton:hover{
+    background: #00a0e0;
+    right: -20px;
+    bottom: 28.5vh;
+    height: 80px;
+    margin: 0;
+}
