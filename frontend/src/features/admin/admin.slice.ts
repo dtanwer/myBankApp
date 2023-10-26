@@ -44,8 +44,8 @@ export const adminSlice = createSlice({
           message: string;
           status: "success" | "error" | "warning" | "info";
         };
-        state.message = message;
-        state.type = status;
+        state.message = message ??"Server Error";
+        state.type = status ?? "error";
         console.log("reject ho gaya !",action.payload);
       });
   },

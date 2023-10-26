@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
 import { authStateType } from "../../@Types/auth";
 import { loginAction, signupAction } from "./auth.action";
 
@@ -10,6 +9,8 @@ const initialState: authStateType = {
   loading: false,
   message: null,
   type: null,
+  modalSignUp: false,
+  modalSignIn: false,
 };
 
 export const authSlice = createSlice({
@@ -24,13 +25,22 @@ export const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    setSignUpModal: (state,action: PayloadAction<boolean>) => {
+      state.modalSignUp = action.payload;
+    },
+    setSignInModal: (state,action: PayloadAction<boolean>) => {
+      state.modalSignIn = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginAction.fulfilled, (state, action) => {
         state.loading = false;
+        state.modalSignIn = false;
+        state.modalSignUp = false;
         state.message = "Login Successfull";
         state.type = "success";
+        state.user = action.payload.data;
         console.log(action.payload);
       })
       .addCase(loginAction.pending, (state, action) => {
@@ -74,5 +84,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { deleteError, setlogOut } = authSlice.actions;
+export const { deleteError, setlogOut,setSignInModal,setSignUpModal } = authSlice.actions;
 export default authSlice.reducer;

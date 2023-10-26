@@ -3,13 +3,15 @@ import icon from '../../img/logo.webp'
 import { NavList } from './NavList'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { setlogOut } from '../../features/admin/admin.slice'
+import { useNavigate } from 'react-router-dom'
 
 export const NavBar = () => {
     const { admin } = useAppSelector(state => state.admin)
+    const  navigate  = useNavigate()
     const dispatch=useAppDispatch()
     return (
         <Box display={'flex'} justifyContent={'space-between'} gap={10} p={4} pt={3} pb={3} zIndex={2} boxShadow={" rgba(149, 157, 165, 0.2) 0px 8px 24px"}>
-            <Box  >
+            <Box onClick={()=>navigate('/')} >
                 <img src={icon} alt="logo" style={{ width: "200px" }} />
             </Box>
             {
