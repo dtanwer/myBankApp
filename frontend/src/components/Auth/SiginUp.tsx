@@ -1,7 +1,7 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { SignUpschema } from '../../utils/formSchma';
+import { SignUpschema } from '../../schema/AuthSchema';
 import { signUpFormDataType } from '../../@Types/Form';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { signupAction } from '../../features/auth/auth.action';

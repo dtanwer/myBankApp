@@ -4,7 +4,7 @@ import { loginFormDataType } from '../../@Types/Form'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useEffect } from 'react'
-import { Loginschema } from '../../utils/formSchma'
+import { Loginschema } from '../../schema/AuthSchema'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { loginAction } from '../../features/auth/auth.action'
 import { deleteError } from '../../features/auth/auth.slice';
