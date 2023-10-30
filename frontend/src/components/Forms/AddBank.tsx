@@ -1,23 +1,37 @@
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Stack, TextField, Typography } from '@mui/material'
 import { modelStyle } from '../../utils/modelStyle'
 import { LoadingButton } from '@mui/lab'
-import { Help } from '@mui/icons-material'
+import { Bankschema } from '../../schema/BankSchma';
+import { BankFormDataType } from '../../@Types/Form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { createBankAction } from '../../features/bank/bank.action';
+import { MuiInput } from '../input/MuiInput';
+
+
 
 export const AddBank = () => {
+    const { address } = useAppSelector(state => state.address)
+    const { loading } = useAppSelector(state => state.bank)
+    const dispatch = useAppDispatch()
+
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<BankFormDataType>({
+        resolver: yupResolver(Bankschema),
+    });
+    const onSubmit = (data: BankFormDataType) => {
+        console.log(address)
+        dispatch(createBankAction({ ...data, address: address?._id }))
+    }
     return (
-        <Box component="form" sx={modelStyle}>
-
+        <Box component="form" sx={modelStyle} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2} sx={{ width: "300px" }}>
-                <Typography variant="h6">Add Bank</Typography>
-                <TextField fullWidth size='small' label="Bank Name" variant="outlined" />
-                <TextField fullWidth size='small' label="Bank Branch" variant="outlined" />
-                <TextField fullWidth size='small' label="IFSC Code" variant="outlined" />
-                <Typography variant="body2" color="text.secondary" fontSize={15} m={0}>Address is Required</Typography>
-                <Button variant="outlined" color="primary">Add Address</Button>
-                <LoadingButton  type="submit" variant="contained" color="primary">Create Bank</LoadingButton>
+                <Typography variant="h6">Bank Details</Typography>
+                <MuiInput name="bankName" register={register} errors={errors}/>
+                <MuiInput name="branchName" register={register} errors={errors}/>
+                <MuiInput name="ifscCode" register={register} errors={errors}/>
+                <LoadingButton type="submit" loading={loading} variant="contained" color="primary">Create Bank</LoadingButton>
             </Stack>
-
         </Box>
     )
 }

@@ -1,8 +1,11 @@
 import AdminModel from "../models/admin.js";
 import { Router } from "express";
 import bcrypt from "bcryptjs";
+import { createEmployee } from "../controller/admin.controller.js";
 
 const router = Router();
+
+router.post("/create-employee", createEmployee);
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -40,5 +43,7 @@ router.post("/signup", async (req, res) => {
     res.status(400).json({ message: error.message, status: "warning" });
   }
 });
+
+
 
 export default router;

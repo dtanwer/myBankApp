@@ -6,5 +6,4 @@ export type authStateType = {
     type:"success"|"error"|"warning"|"info"|null;
     modalSignIn:boolean;
     modalSignUp:boolean;
-
 }

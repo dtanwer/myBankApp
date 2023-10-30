@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
     bankId: {
-        type: String,
-        required: "Bank Id is required"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Bank",
     },
     name: {
         type: String,
@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true ,
         required: "Email is required"
     },
     accountNumber: {

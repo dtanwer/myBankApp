@@ -1,7 +1,7 @@
 import BankModel from "../models/bank.js";
 
-const postBankServices = async (req) => {
-  const bank = new BankModel(req.body);
+const postBankServices = async (body) => {
+  const bank = new BankModel(body);
   const result = await bank.save();
   return result;
 };

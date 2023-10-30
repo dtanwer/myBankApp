@@ -8,7 +8,7 @@ type InputModelsProps = {
 
 export const InputModels = ({ open, setOpen, children }: InputModelsProps) => {
     return (
-        <Box>
+        <Box >
             <Modal
                 open={open}
                 onClose={() => setOpen(false)}

@@ -35,6 +35,5 @@ export const Bankschema = yup.object().shape({
     .string()
     .required("IFSC code is required")
     .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Please enter valid IFSC Code"),
-  address: addressSchema.concat(yup.object().shape({})),
 });
 
