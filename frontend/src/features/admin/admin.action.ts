@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createEmployeeType, loginType } from "./admin.type";
-import { loginAdminService } from "../../services/admin.services";
+import { createEmployeeService, loginAdminService } from "../../services/admin.services";
 import { adminLogin } from "../../@Types/admin";
 import { AxiosError } from "axios";
 
@@ -20,10 +20,10 @@ const loginAction = createAsyncThunk(
 const createEmployeeAction = createAsyncThunk(
   createEmployeeType,
   async (details: any, thunkAPI) => {
+    console.log(details)
     try {
-      const response = await loginAdminService(details);
-      const data = await response.data;
-      return data;
+      const response = await createEmployeeService(details);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue((error as AxiosError).response?.data);
     }

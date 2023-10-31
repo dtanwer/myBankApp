@@ -60,7 +60,7 @@ export const adminSlice = createSlice({
       })
       .addCase(createEmployeeAction.rejected, (state, action) => {
         state.loading = false;
-
+        console.log(action.payload,"---------------------->")
         const { message, status } = action.payload as {
           message: string;
           status: "success" | "error" | "warning" | "info";

@@ -1,6 +1,14 @@
 import * as yup from "yup";
 export const employeeSchema = yup.object().shape({
-  bankId: yup.string().required("Bank is required"),
+  bankId: yup
+    .object().shape({
+      value: yup.string()
+      .required("Bank is required"),
+
+      label: yup.string()
+      .required("Bank is required"),
+    })
+    .required("Bank is required"),
   name: yup
     .string()
     .required("Name is required")
@@ -10,7 +18,14 @@ export const employeeSchema = yup.object().shape({
     .required("Email is required")
     .email("Please enter valid email")
     .matches(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/, "Please enter valid email"),
-  type: yup
-  .string()
-  .required("Type is required"),
+  type : yup
+    .object().shape({
+      value: yup.string()
+      .required("Type is required"),
+
+      label: yup.string()
+      .required("Type is required"),
+    })
+    .required("Type is required"),
+
 });

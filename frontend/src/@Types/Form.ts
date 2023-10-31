@@ -26,8 +26,12 @@ export type AddressFormDataType ={
 }
 
 export type EmployeeFormDataType ={
-    bankId: string;
+    bankId: optionFields;
     name: string;
     email: string;
-    type: string;
+    type: optionFields;
+}
+export type optionFields = {
+    value: string;
+    label: string;
 }

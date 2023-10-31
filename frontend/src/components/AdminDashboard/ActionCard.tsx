@@ -24,7 +24,7 @@ export const ActionCard = ({ icon, text }: ActionCardProps) => {
             <InputModels open={open} setOpen={setOpen}>
                 {text === 'Create Bank' ?
                     <Bank setOpen={setOpen} /> :
-                    <Employee />
+                    <Employee setOpen={setOpen}/>
                 }
 
             </InputModels>

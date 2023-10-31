@@ -1,7 +1,8 @@
 import { Autocomplete, TextField } from "@mui/material"
 import { Controller } from "react-hook-form"
+import { optionFields } from "../../@Types/Form"
 type MuiAutoCompleteProps = {
-    options: string[]
+    options: optionFields[]
     name: string
     register: any
     errors: any

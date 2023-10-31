@@ -35,7 +35,7 @@ const bankSlice = createSlice({
     builder
       .addCase(getBanksAction.fulfilled, (state, action) => {
         state.loading = false;
-        state.banks = action.payload;
+        state.banks = action.payload.data;
       })
       .addCase(getBanksAction.pending, (state, action) => {
         state.loading = true;
