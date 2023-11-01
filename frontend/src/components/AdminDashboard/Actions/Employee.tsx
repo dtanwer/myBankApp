@@ -23,7 +23,7 @@ export const Employee = ({setOpen}:EmployeeProps) => {
     }, 1000);
 
     if (type === 'success') {
-      setOpen(false);
+      setOpen(false); 
     }
   }, [message, type])
   return (

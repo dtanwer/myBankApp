@@ -1,0 +1,8 @@
+.chatWindow{
+    position: absolute;
+    right: 0;
+    top:50%;
+    background-color: red;
+    width: 500px;
+    height: 400px;   
+}

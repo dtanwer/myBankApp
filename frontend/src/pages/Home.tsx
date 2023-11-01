@@ -6,6 +6,7 @@ import { ChatNow } from '../components/ChatNow/ChatNow'
 import { useAppSelector } from '../app/hooks'
 import { Box } from '@mui/material'
 import { UserDashBoard } from '../components/Dashboard/UserDashBoard'
+import { ChatWindow } from '../components/ChatWindow/ChatWindow'
 
 export const Home = () => {
   const { user } = useAppSelector(state => state.auth)
@@ -18,6 +19,7 @@ export const Home = () => {
           <InfoCarousel />
         </Box>}
       <ChatNow />
+      {/* <ChatWindow/> */}
     </div>
   )
 }
