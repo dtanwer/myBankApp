@@ -26,10 +26,10 @@ export type AddressFormDataType ={
 }
 
 export type EmployeeFormDataType ={
-    bankId: optionFields;
+    bankId: optionFields|any;
     name: string;
     email: string;
-    type: optionFields;
+    type: optionFields|any;
 }
 export type optionFields = {
     value: string;

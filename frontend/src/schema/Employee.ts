@@ -26,6 +26,7 @@ export const employeeSchema = yup.object().shape({
       label: yup.string()
       .required("Type is required"),
     })
+    
     .required("Type is required"),
 
 });

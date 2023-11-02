@@ -20,20 +20,31 @@ import { getBanksOptions, typeOptions } from "../../utils/employee"
 export const AddEmployee = () => {
   const { register, handleSubmit, formState: { errors }, reset, control } = useForm<EmployeeFormDataType>({
     resolver: yupResolver(employeeSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      type:null,
+      bankId:null
+    }
   });
   const { loading } = useAppSelector(state => state.address)
   const { banks } = useAppSelector(state => state.bank)
   const dispatch = useAppDispatch()
   const onSubmit = (data: EmployeeFormDataType) => {
-    dispatch(createEmployeeAction({
-      ...data,
-      bankId: data.bankId.value,
-      role: data.type.value
-    }))
+    console.log(data)
+    // dispatch(createEmployeeAction({
+    //   ...data,
+    //   bankId: data.bankId.value,
+    //   role: data.type.value
+    // }))
+  }
+  const handelReset = () => {
+    reset()
   }
   useEffect(() => {
     dispatch(getBanksAction())
   }, [])
+  
   const bankOptions = useMemo(() => getBanksOptions(banks), [banks])
   return (
     <Box component="form" sx={modelStyle} onSubmit={handleSubmit(onSubmit)} >
@@ -44,6 +55,7 @@ export const AddEmployee = () => {
         <MuiAutoComplete name="type" options={typeOptions} register={register} errors={errors} control={control} />
         <MuiAutoComplete name="bankId" options={bankOptions} register={register} errors={errors} control={control} />
         <LoadingButton loading={loading} type="submit" variant="outlined" color="primary">Add Employee</LoadingButton>
+        <LoadingButton loading={loading} onClick={handelReset} variant="outlined" color="primary">reset</LoadingButton>
       </Stack>
     </Box>
   )
